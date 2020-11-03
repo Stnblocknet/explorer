@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="shortcut icon" type="image/ico" href="../img/favicon.ico" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="js/sorttable.js"></script>
+
+    <style>
+      table.sortable tbody {
+        counter-reset: sortabletablescope;
+      }
+      table.sortable thead tr::before {
+        content: "";
+        display: table-cell;
+      }
+      table.sortable tbody tr::before {
+        content: counter(sortabletablescope);
+        counter-increment: sortabletablescope;
+        display: table-cell;
+      }
+      table.sortable tbody tr:nth-child(2n) td {
+        background: #e6eeff;
+      }
+      table.sortable tbody tr:nth-child(2n + 1) td {
+        background: #e6eeff;
+      }
+      table.sortable tbody tr {
+        padding: 0.9rem;
+        vertical-align: top;
+        border-top: 2px solid #dee2e6;
+      }
+      table.sortable thead {
+        padding: 0.9rem;
+        vertical-align: top;
+        border-top: 2px solid #dee2e6;
+      }
+
+input[type=text] {
+  width: 1150px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+  width: 100%;
+}
+    </style>
+
+    <meta charset="utf-8">
+    <title>STN Explorer - WAVES tokens</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- SmartAddon.com Verification -->
+    <meta name="smartaddon-verification" content="936e8d43184bc47ef34e25e426c508fe" />
+	<meta name="keywords" content="cryptocurrency, smart contracts, UI, user interface, dapps developpement, user interface wallet, decentralized application, Blockchain network, staytunne blocknet, STN assets , crypto">
+	<meta name="description" content="trusted block explorer and crypto transaction search engine based STN blockchain and assets managements.">
+    <link rel="shortcut icon" href="favicon_16.ico"/>
+    <link rel="bookmark" href="favicon_16.ico"/>
+    <!-- site css -->
+    <link rel="stylesheet" href="css/site.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/site.min.js"></script>
+  </head>
+  <body>
+
+
+    <div class="docs-header">
+      <!--nav-->
+      <nav class="navbar navbar-default navbar-custom" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://staytunne.com"><img src="img/logo.png" height="40"></a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="nav-link" href="https://waves.exchange/trade/ETTf7Pmqb8tdn7DqBcu4GpcEb5HNzY1GsNs8Rzbw2f6P_WAVES">STN Token ICO</a></li>
+              <li><a class="nav-link" href="https://network.staytunne.com/blocknet.html">How STNblocknet works</a></li>
+              <li><a class="nav-link" href="#">Wallet</a></li>
+              <li><a class="nav-link" href="#">STN Nodes stats</a></li>
+              <li><a class="nav-link" href="#">STN Testnet [Soon]</a></li>
+
+
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!--header-->
+      <div class="topic">
+        <div class="container">
+			
+          <div class="container">
+            <center><h1><b>WAVES Assets Explorer</b></h1></center>
+<p></p>
+            <center>Based on the STN BlockNetwork</center>
+
+          </div>
+        </div>
+      </div>
+    </div>     
+    <div class="container mt-5">
+      <div class="row col-lg-12 mx-autmt-2">
+
+<div class="wrap">
+   <div class="search">
+
+    <input id="assetIdToSubmit" type="text" name="search" placeholder="Search for asset ID .." value="ETTf7Pmqb8tdn7DqBcu4GpcEb5HNzY1GsNs8Rzbw2f6P"></input> 
+<center> <button class="btn row col-4 mt-2 btn-info" id="buttonSubmit">ASSETS ID</button></center>
+
+
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+
+      </div>
+      
+           <div class="row mt-5">
+        <div class="col-12 col-lg-8">
+            <h1 class="display-4">
+ <span class="tokenName">Custom tokens </span><span id="containerTypeExplorer">explorer</span>
+           <span id="containerTypeWhitelist" style="display: none">whitelist</span>
+
+          </h1>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container mt-5">
+      <div class="row mt-5">
+        <div class="col-12 col-lg-6">
+          <div id="total"></div>
+          <div id="totalsupply"></div>
+          <div>&nbsp;</div>
+          <a id="clickWhitelist"
+            >Click to See <span class="tokenName">Personalized</span> whitelist
+            <i class="fa fa-pie-chart text-info"></i
+          ></a> 
+          <a id="clickExplorer" style="display: none"
+              >Click to See <span class="tokenName">Personalized</span> explorer
+              <i class="fa fa-search text-info"></i
+            ></a>
+          <div>&nbsp;</div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div>
+            <b><p style="color:#4db8ff">Foundation Wallet :</p></b>
+            <span id="walletName"></span>
+          </div>
+        </div>
+
+        <strong></strong>
+      </div>
+<!--Starts Explorer section-->
+      <div class="row mt-4" id="containerExplorer">
+        <div class="col">
+          <table class="table sortable" id="myTable">
+            <thead>
+              <tr>
+                <!--When a header is clicked, run the sortTable function, with a parameter,
+0 for sorting by address, or 1 for sorting by balance: -->
+                <th onClick="" style="cursor: pointer">Timestamp</th>
+                <th onClick="" style="cursor: pointer">Height</th>
+                <th onClick="" style="cursor: pointer">Type</th>
+                <th onClick="" style="cursor: pointer">Sender</th>
+                <th onClick="" style="cursor: pointer">Receiver</th>
+                <th
+                  onClick=""
+                  style="cursor: pointer"
+                  class="sorttable_numeric"
+                >
+                  Amount
+                </th>
+              </tr>
+            </thead>
+            <tbody id="explorer"></tbody>
+          </table>
+        </div>
+      </div>
+    
+    <!--Ends Explorer section-->
+    <!--Start Whitelist section-->
+    
+        <div class="row mt-4" id="containerWhitelist" style="display: none">
+          <div class="col">
+            <table class="table sortable" id="myTable">
+              <thead>
+                <tr>
+                  <!--When a header is clicked, run the sortTable function, with a parameter,
+  0 for sorting by address, or 1 for sorting by balance: -->
+                  <th onClick="" style="cursor: pointer">Address</th>
+                  <th
+                    onClick=""
+                    style="cursor: pointer"
+                    class="sorttable_numeric"
+                    id="thBalance"
+                  >
+                    Balance
+                  </th>
+                  <th
+                    onClick=""
+                    style="cursor: pointer"
+                    class="sorttable_numeric"
+                    id="thsupply"
+                  >
+                    % Supply
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="whitelist"></tbody>
+            </table>
+          </div>
+        </div>
+      
+ <!--Ends Whitelist section-->
+</div>
+    <script src="js/index.js">
+</script>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr class="dashed" />
+          <div class="copyright clearfix">
+          <center><p><b>Staytunne Block Network</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://waves.exchange/trade/ETTf7Pmqb8tdn7DqBcu4GpcEb5HNzY1GsNs8Rzbw2f6P_WAVES">STN Asset ICO</a>&nbsp;&bull;&nbsp;<a href="blocknet.html">How STNblocknet works</a>&nbsp;&bull;&nbsp;<a href="#">Discover Dapps</a>&nbsp;&bull;&nbsp;<a href="#">Nodes stats</a>&nbsp;&bull;&nbsp;<a href="https://t.me/stncommunity">Telegram Community</a>&nbsp;&bull;&nbsp;<a href="https://github.com/Stnblocknet">Github</a>&nbsp;&bull;&nbsp;<a href="https://twitter.com/staytunne">twitter</a></p></center>
+            <center><p>&copy; 2019-2020 , Inc. All rights reserved. &nbsp;&nbsp;</p></center>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-48721682-1', 'bootflat.github.io');
+	  ga('require', 'displayfeatures');
+      ga('send', 'pageview');
+
+    </script>
+ 
+
+  </body>
+</html>
+
